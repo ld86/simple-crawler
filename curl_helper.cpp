@@ -29,11 +29,10 @@ namespace shad_pdc { namespace crawler {
         return code;
     }
 
-    std::shared_ptr<std::string> wget_string(const std::string& url) {
-        std::shared_ptr<std::string> content = std::shared_ptr<std::string>(
-                new std::string());
-        curl_read(url, *content);
-        return content;
+    std::shared_ptr<page_t> get_page(std::shared_ptr<url_t> url) {
+        auto content = std::shared_ptr<std::string>(new std::string());
+        curl_read(url->url, *content);
+        return std::shared_ptr<page_t>(new page_t(url, content));
     }
 }}
 

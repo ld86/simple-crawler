@@ -4,7 +4,6 @@
 #include <memory>
 
 #include "curl_helper.h"
-#include "page.h"
 
 namespace shad_pdc { namespace crawler {
     class url_t {
@@ -15,7 +14,6 @@ namespace shad_pdc { namespace crawler {
         const uint32_t distance;
 
         static std::shared_ptr<url_t> start_url(const std::string& url);
-        std::shared_ptr<page_t> get_page();
-        bool operator<(const url_t& rhs) const;
+        std::shared_ptr<url_t> make_child(const std::string& href_url);
     };
 }}

@@ -8,10 +8,11 @@
 #include "page.h"
 #include "parameters.h"
 #include "worker.h"
+#include "save_worker.h"
 
 namespace shad_pdc { namespace crawler {
     class crawler_t {
-        queue_t<page_t> page_queue_;
+        queue_t<std::shared_ptr<page_t>> page_queue_;
         url_queue_t url_queue_;
 
         parameters_t parameters_;
