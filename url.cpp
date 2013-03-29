@@ -14,9 +14,13 @@ namespace shad_pdc { namespace crawler {
     std::shared_ptr<url_t> url_t::make_child(const std::string& href_url) {
         std::string child_url = href_url;
         if ( href_url.find("/") == 0) {
-            child_url = url + href_url;
+            if (url[url.size() - 1] == '/')
+            {
+                child_url = url + href_url.substr(1);
+            } else {
+                child_url = url + href_url;
+            }
         }
         return std::shared_ptr<url_t>(new url_t(child_url, distance + 1));
     }
-
 }}

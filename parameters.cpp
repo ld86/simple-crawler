@@ -7,9 +7,18 @@ namespace shad_pdc { namespace crawler {
         deep(atoi(argv[2])),
         max_page_count(atoi(argv[3])),
         save_path(argv[4]),
-        download_concurrency(4), 
+        download_concurrency(8), 
         save_concurrency(2), 
         parse_concurrency(2) {
+            if (argc >= 6) {
+                download_concurrency = atoi(argv[5]);
+            }
+            if (argc >= 7) {
+                save_concurrency = atoi(argv[6]);
+            }
+            if (argc >= 8) {
+                parse_concurrency = atoi(argv[7]);
+            }
         }
 
 

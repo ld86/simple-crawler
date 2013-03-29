@@ -66,6 +66,8 @@ namespace shad_pdc { namespace crawler {
         run_parse_workers();
         run_save_workers();
 
+        
+
         for (uint32_t i = 0; i < download_threads.size(); ++i) {
             download_threads[i]->join();
         }

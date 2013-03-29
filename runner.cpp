@@ -2,7 +2,7 @@
 
 namespace shad_pdc { namespace crawler {
     bool runner_t::is_right_parameters(int argc, char** argv) {
-        if (argc != 5) {
+        if (argc < 5) {
             return false;
         }
 
@@ -10,7 +10,14 @@ namespace shad_pdc { namespace crawler {
     }
 
     int runner_t::show_usage(char** argv) {
-        std::printf("%s\n", argv[0]);
+        std::printf("%s "
+                    "<start url> "
+                    "<max deep> "
+                    "<max saved page> "
+                    "<download directory> "
+                    "[download concurrency] "
+                    "[save concurrency] "
+                    "[parse concurrency]\n", argv[0]);
         return -1;
     }
 

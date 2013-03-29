@@ -4,6 +4,8 @@
 #include <mutex>
 #include <condition_variable>
 
+#include "url.h"
+
 namespace shad_pdc { namespace crawler {
     template <typename T>
         class queue_t {
@@ -36,4 +38,34 @@ namespace shad_pdc { namespace crawler {
             }
         };
 
+    template<>
+        class queue_t<std::shared_ptr<url_t>> {
+            typedef std::shared_ptr<url_t> item_t;
+
+            std::priority_queue<item_t> inner_queue_;
+            mutable std::mutex mutex_;
+            std::condition_variable cond_;
+
+            public:
+            void put(const item_t& item) {
+                std::lock_guard<std::mutex> lock(mutex_);
+                inner_queue_.push(item);
+                cond_.notify_one();
+            }
+
+            item_t take() {
+                std::unique_lock<std::mutex> ulock(mutex_);
+                while (inner_queue_.empty()) {
+                    cond_.wait(ulock);
+                }
+                item_t value = inner_queue_.top();
+                inner_queue_.pop();
+                return value;
+            }
+
+            bool is_empty() const {
+                std::lock_guard<std::mutex> lock(mutex_);
+                return inner_queue_.empty();
+            }
+        };
 }}

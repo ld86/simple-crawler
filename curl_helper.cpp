@@ -24,7 +24,11 @@ namespace shad_pdc { namespace crawler {
                     && CURLE_OK == 
                     (code = curl_easy_setopt(curl, CURLOPT_TIMEOUT, timeout))
                     && CURLE_OK ==
-                    (code = curl_easy_setopt(curl, CURLOPT_USERAGENT, user_agent))) {
+                    (code = curl_easy_setopt(curl, CURLOPT_USERAGENT, user_agent))
+                    && CURLE_OK ==
+                    (code = curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1))
+                    && CURLE_OK == 
+                    (code = curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 1 ))) {
                 code = curl_easy_perform(curl);
             }
             curl_easy_cleanup(curl);

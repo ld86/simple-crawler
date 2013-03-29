@@ -13,6 +13,7 @@ namespace shad_pdc { namespace crawler {
         if (!stop_.load()) {
             if (url->distance < parameters_.deep) {
                 if (visited_pages_.find(url->url) == visited_pages_.end()) {
+
                     visited_pages_.insert(url->url);
                     url_queue_.put(url);
                     return true;

@@ -11,9 +11,9 @@ namespace shad_pdc { namespace crawler {
             const uint32_t max_page_count;
             const std::string save_path;
 
-            const uint32_t download_concurrency;
-            const uint32_t save_concurrency;
-            const uint32_t parse_concurrency;
+            uint32_t download_concurrency;
+            uint32_t save_concurrency;
+            uint32_t parse_concurrency;
 
             parameters_t(int argc, char** argv);
     };
