@@ -12,6 +12,10 @@ namespace shad_pdc { namespace crawler {
     void parse_worker_t::operator()() {
         for (;;) {
             auto page = page_queue_.take();
+            if (!page) {
+                break;
+            }
+
             uint32_t links_count = 0;
             for (auto url : page->get_links()) {
                 if(url_queue_.add_url(url)) {
@@ -20,5 +24,6 @@ namespace shad_pdc { namespace crawler {
             }
             std::printf("[P%d] %d\n", id_, links_count);
         }
+        std::printf("[P%d] exit\n", id_);
     }
 }}
