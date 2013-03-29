@@ -7,6 +7,7 @@ namespace shad_pdc { namespace crawler {
 
     bool url_queue_t::add_url(std::shared_ptr<url_t> url) {
         std::lock_guard<std::mutex> lock(mutex_);
+        
         if (url->distance < parameters_.deep) {
             if (visited_pages_.find(url->url) == visited_pages_.end()) {
                 visited_pages_.insert(url->url);
@@ -19,5 +20,9 @@ namespace shad_pdc { namespace crawler {
 
     std::shared_ptr<url_t> url_queue_t::next_url() {
         return url_queue_.take();
+    }
+
+    bool url_queue_t::is_empty() const {
+        return url_queue_.is_empty();
     }
 }}

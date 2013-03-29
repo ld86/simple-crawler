@@ -3,6 +3,7 @@
 #include <set>
 #include <mutex>
 #include <memory>
+#include <atomic>
 
 #include "queue.h"
 #include "page.h"
@@ -19,5 +20,6 @@ namespace shad_pdc { namespace crawler {
         url_queue_t(const parameters_t& parameters);
         bool add_url(std::shared_ptr<url_t> url);
         std::shared_ptr<url_t> next_url();
+        bool is_empty() const;
     };
 }}

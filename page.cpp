@@ -27,7 +27,6 @@ namespace shad_pdc { namespace crawler {
         for (auto it = begin; it != end; ++it) {
             std::string href_url = (*it)[1].str();
             if (is_url(href_url)) {
-                // std::printf("%s\n", href_url.c_str());
                 links.push_back(url_->make_child(href_url));
             }
         }
